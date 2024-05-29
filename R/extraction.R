@@ -14,7 +14,14 @@ find_path <- function() {
 }
 
 
-unabbreviate_street_type <- function(abbrv_street_types) {
+#' Unabbreviate street types
+#'
+#' Takes a list of abbreviated street types and returns a list of full street
+#' types. Mostly a wrapper to make Python import easier.
+#' @name unabbreviate_street_types
+#' @param abbrv_street_types List of abbreviated street types
+#' @export
+unabbreviate_street_types <- function(abbrv_street_types) {
   find_path() %>%
     paste0("/extract_addresses.py") %>%
     reticulate::py_run_file()
