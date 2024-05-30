@@ -108,6 +108,7 @@ scrub_place <- function(place_col) {
 #'   accepted.
 #' @param nthread Number of threads stringdistmatrix should use.
 #' @param dump_path Path for validation output.
+#' @export
 #' @examples
 #' match_address_pile(
 #'   targ_df = sites_df,

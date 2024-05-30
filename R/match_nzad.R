@@ -21,6 +21,7 @@
 #' @param drop_multi_results If more than one result is returned for a given
 #'   address, return a single blank placeholder instead. This is useful if you
 #'   expected a one- to-one join.
+#' @export
 #' @examples
 #' match_nzad_addresses(
 #'   targ_df = sites_df,
