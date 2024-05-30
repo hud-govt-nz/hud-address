@@ -1,3 +1,29 @@
+#' Fetch NZAD addresses
+#'
+#' Fetches NZAD addressse from the database and cleans them for matching.
+#'
+#' @name match_nzad_addresses
+#' @export
+fetch_nzad_addresses <- function() {
+  hud.keep::db_connect("property") %>%
+    DBI::dbGetQuery("
+      SELECT * FROM [Source].[NZPost_NZAD_Address]
+      WHERE address_type = 'URBAN'
+      OR address_type = 'RURAL'") %>%
+    rename_all(tolower) %>%
+    rename(
+      floor = floor_identifier,
+      unit = unit_identifier,
+      number = street_number,
+      alpha = street_alpha,
+      dpid = dp_id,
+      regc_id = regional_council_id,
+      regc_name = regional_council_name) %>%
+    mutate_if(is.character, ~ na_if(., "")) %>%
+    mutate(qpid = na_if(qpid, 0))
+}
+
+
 #' Match NZAD addresses
 #'
 #' Takes a list of partially/fully structured addresses and return matching row

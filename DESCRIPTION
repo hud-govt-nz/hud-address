@@ -13,4 +13,6 @@ Imports:
   tidyverse,
   stringr,
   stringdist,
-  reticulate
+  reticulate,
+  DBI,
+  hud.keep

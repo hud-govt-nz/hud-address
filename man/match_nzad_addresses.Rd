@@ -2,8 +2,11 @@
 % Please edit documentation in R/match_nzad.R
 \name{match_nzad_addresses}
 \alias{match_nzad_addresses}
-\title{Match NZAD addresses}
+\alias{fetch_nzad_addresses}
+\title{Fetch NZAD addresses}
 \usage{
+fetch_nzad_addresses()
+
 match_nzad_addresses(
   targ_df,
   structured_cols,
@@ -37,6 +40,8 @@ address, return a single blank placeholder instead. This is useful if you
 expected a one- to-one join.}
 }
 \description{
+Fetches NZAD addressse from the database and cleans them for matching.
+
 Takes a list of partially/fully structured addresses and return matching row
 from NZAD (or something that looks like the NZAD) dataset.
 }
