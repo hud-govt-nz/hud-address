@@ -20,7 +20,9 @@ fetch_nzad_addresses <- function() {
       regc_id = regional_council_id,
       regc_name = regional_council_name) %>%
     mutate_if(is.character, ~ na_if(., "")) %>%
-    mutate(qpid = na_if(qpid, 0))
+    mutate(
+      qpid = na_if(qpid, 0),
+      number = as.integer(number))
 }
 
 
