@@ -55,8 +55,9 @@ extract_street_addresses <- function(street_addresses, dump_path = NULL) {
     street_addresses %>%
     unique() %>%
     lapply(function(sa) { # DO NOT use map() here, as errors don't get raised
-      # if (is.na(sa)) return(NULL)
-      sa %>%
+      if (is.na(sa)) return(NULL)
+      extracted_row <-
+        sa %>%
         str_replace("\\s{2,}", " ") %>% # Remove extra spaces
         str_replace("\xff", "") %>% # Remove special characters - they cause segfaults bc reasons
         reticulate::py$extract_all_addresses() %>%
@@ -64,7 +65,9 @@ extract_street_addresses <- function(street_addresses, dump_path = NULL) {
           lapply(r, function(x) ifelse(is.null(x), NA, x)) %>%
           unlist()
         }) %>%
-        do.call(rbind, .) %>%
+        do.call(rbind, .)
+      if (is.null(extracted_row)) return(NULL)
+      extracted_row %>%
         as_tibble(.name_repair = "minimal") %>%
         setNames(c(
           "unit", "number", "alpha",
